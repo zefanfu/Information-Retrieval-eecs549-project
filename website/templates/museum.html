@@ -1,0 +1,55 @@
+{% extends "general.html" %}
+
+{% block content1 %}
+{% if single == False %}
+<div style="text-align: center;">
+<h1> Museum Advanced Search Page</h1>
+<form  id = "mainform" role="form" method = "GET" action="/museum">
+    <input type="text" name = "query" style="width: 600px; height: 40px; margin-top:20px;font-size:20px" class="form-control transparent" placeholder="Area or museum type...">
+  <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="margin-top: 20px; font-size:20px">Search</button><br>
+</form>
+</div>
+{% if search == True %}
+{% if no_museum == False %}
+{% for result in museum %}
+
+{% if result['name'] != "" %}
+<p style="color=blue;">Name: {{result['name']}}</p>
+{% endif %}
+{% if result['city'] != "" %}
+<p>City: {{result['city']}}</p>
+{% endif %}
+{% if result['address'] != "" %}
+<p>Address: {{result['address']}}</p>
+{% endif %}
+<form method = "POST" action="/museum/single">
+  <input type="hidden" name="singleinfo" value="{{result}}">
+  <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="margin-top: 20px; font-size:20px">More info</button><br>
+</form>
+{% endfor %}
+{% endif %}
+{% if no_museum == True %}
+<p>Sorry, no result for your query</p>
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if single == True %}
+<div style="text-align: center;">
+<h1> Single Restaurant Info </h1>
+{% if singleinfo['name'] != "" %}
+<p style="color=blue;">Name: {{single['name']}}</p>
+{% endif %}
+{% if singleinfo['address'] != "" %}
+<p>Address: {{single['address']}}</p>
+{% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
+{% block content2 %}
+{% endblock %}
+{% block content3 %}
+{% endblock %}
+{% block content4 %}
+{% endblock %}

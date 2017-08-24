@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+body {
+    color: black;
+}
+
+p {
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body style="background-image: url('/static/images/b5.jpg');background-size:100%,100%;text-align: center;">
+<div >
+<img src='/static/images/default.jpg' style="width: 100%; height: 80px;">
+</div>
+<div>
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  <li><a href="/restaurant">Advanced Search:  Restaurant</a></li>
+  <li><a href="/museum">Advanced Search: Museum</a></li>
+</ul>
+</div>
+
+
+
+{% block content1 %}
+{% if typename == "general" %}
+<div>
+    <h1> Restaurant and Shop Info: </h1>
+    {% if no_rest == False %}
+    {% for result in restaurant %}
+    {% if result['name'] != "" %}
+    <p style="color=blue;">Name: {{result['name']}}</p>
+    {% endif %}
+    {% if result['city'] != "" %}
+    <p>City: {{result['city']}}</p>
+    {% endif %}
+    {% if result['address'] != "" %}
+    <p>Address: {{result['address']}}</p>
+    {% endif %}
+    <form method = "POST" action="/restaurant/single">
+      <input type="hidden" name="result" value="{{result}}">
+      <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="font-size:20px">More info</button><br>
+    </form>
+    {% endfor %}
+    {% endif %}
+    {% if no_rest == True %}
+    <p>Sorry, no result for your query</p>
+    {% endif %}
+</div>
+<div>
+    <h1> Museum Info: </h1>
+    {% if no_museum == False %}
+    {% for result in museum %}
+    {% if result['name'] != "" %}
+    <p style="color=blue;">Name: {{result['name']}}</p>
+    {% endif %}
+    {% if result['city'] != "" %}
+    <p>City: {{result['city']}}</p>
+    {% endif %}
+    {% if result['address'] != "" %}
+    <p>Address: {{result['address']}}</p>
+    {% endif %}
+    <form method = "POST" action="/museum/single">
+      <input type="hidden" name="result" value="{{result}}">
+      <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="font-size:20px">More info</button><br>
+    </form>
+    {% endfor %}
+    {% endif %}
+    {% if no_museum == True %}
+    <p>Sorry, no result for your query</p>
+    {% endif %}
+</div>
+{% endif %}
+
+
+
+{% if typename == "restaurant" %}
+<div>
+    <h1> Restaurant and Shop Info: </h1>
+    {% if no_rest == False %}
+    {% for result in museum %}
+    {% if result['name'] != "" %}
+    <p style="color=blue;">Name: {{result['name']}}</p>
+    {% endif %}
+    {% if result['city'] != "" %}
+    <p>City: {{result['city']}}</p>
+    {% endif %}
+    {% if result['address'] != "" %}
+    <p>Address: {{result['address']}}</p>
+    {% endif %}
+    <form method = "POST" action="/restaurant/single">
+      <input type="hidden" name="result" value="{{result}}">
+      <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="font-size:20px">More info</button><br>
+    </form>
+    {% endfor %}
+    {% endif %}
+    {% if no_rest == True %}
+    <p>Sorry, no result for your query</p>
+    {% endif %}
+
+</div>
+{% endif %}
+
+
+
+{% if typename == "museum" %}
+<div>
+    <h1> Museum Info: </h1>
+{% if no_museum == False %}
+{% for result in museum %}
+
+{% if result['name'] != "" %}
+<p style="color=blue;">Name: {{result['name']}}</p>
+{% endif %}
+{% if result['city'] != "" %}
+<p>City: {{result['city']}}</p>
+{% endif %}
+{% if result['address'] != "" %}
+<p>Address: {{result['address']}}</p>
+{% endif %}
+<form method = "POST" action="/museum/single">
+  <input type="hidden" name="singleinfo" value="{{result}}">
+  <button type="submit" id = "submit" class="btn btn-danger btn-fill" style="margin-top: 20px; font-size:20px">More info</button><br>
+</form>
+{% endfor %}
+{% endif %}
+{% if no_museum == True %}
+<p>Sorry, no result for your query</p>
+{% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
+</body>
+</html>
