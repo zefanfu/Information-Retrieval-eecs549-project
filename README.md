@@ -1,4 +1,4 @@
-#This is the project for Information Retrieval course
+# This is the project for Information Retrieval course
 
 Preparing for a perfect trip and geting all the information easily of a dream destination is always a problem for travel enthusiasts. In the real world, when travelers are planning for a trip, they need to go to diﬀerent websites to gather information. Therefore, we want to build a search engine that could provide a one-stop service that can provide many information that a traveler wants to know.
 
